@@ -9,12 +9,14 @@ class StringCalculator
       numbers = parts[1]
     end
 
-    numbers.gsub!("\n", delimiter)
+    numbers = numbers.gsub("\n", delimiter)
     nums = numbers.split(delimiter).map(&:to_i)
+
     negatives = nums.select { |n| n < 0 }
     unless negatives.empty?
       raise "negative numbers not allowed: #{negatives.join(', ')}"
     end
-    nums.sum
+
+    nums.reject { |n| n > 1000 }.sum
   end
 end
